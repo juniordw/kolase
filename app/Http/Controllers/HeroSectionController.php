@@ -30,7 +30,19 @@ class HeroSectionController extends Controller
      */
     public function store(StoreHeroSectionRequest $request)
     {
-        //
+        DB::transaction(function() use ($request){
+            $validated = $request->validated();
+
+            if($request->hasFile('banner')){
+                $iconPath = $request->file('banner')->store('banners', 'public');
+                $validated['banner'] = $bannerPath;
+            }
+
+            $newHeroSection = HeroSection::create($validated);
+
+        });
+
+        return redirect()->route('admin.hero_sections.index');
     }
 
     /**

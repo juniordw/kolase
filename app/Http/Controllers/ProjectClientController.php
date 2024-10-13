@@ -30,7 +30,24 @@ class ProjectClientController extends Controller
      */
     public function store(StoreClinetRequest $request)
     {
-        //
+        DB::transaction(function() use ($request){
+            $validated = $request->validated();
+
+            if($request->hasFile('avatar')){
+                $avatarPath = $request->file('avatar')->store('avatars', 'public');
+                $validated['avatar'] = $avatarPath;
+            }
+
+            if($request->hasFile('logo')){
+                $iconPath = $request->file('logo')->store('logos', 'public');
+                $validated['logo'] = $logoPath;
+            }
+
+            $newClients = ProjectClient::create($validated);
+
+        });
+
+        return redirect()->route('admin.clients.index');
     }
 
     /**
