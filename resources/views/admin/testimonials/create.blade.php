@@ -8,8 +8,8 @@
     <div class="py-12">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden p-10 shadow-sm sm:rounded-lg"> 
-                @if ($error->any())
-                @foreach ($error-all() as $error)
+                @if ($errors->any())
+                @foreach ($errors-all() as $error)
                 <div class="py-3 w-full rounded-3xl bg-red-500 text-white">
                     {{$error}}
                 </div>
@@ -22,7 +22,7 @@
                         
                         <select name="project_client_id" id="project_client_id" class="py-3 rounded-lg pl-3 w-full border border-slate-300">
                             @foreach ($clients as $client)
-                            <option value="">Choose project_client</option>
+                            <option value="{{ $client->id }}">{{ $client->name }}</option>
                             @endforeach 
                         </select>
 
