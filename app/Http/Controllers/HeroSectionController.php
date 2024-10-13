@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreHeroSectionRequest;
 use App\Models\HeroSection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HeroSectionController extends Controller
 {
@@ -34,7 +35,7 @@ class HeroSectionController extends Controller
             $validated = $request->validated();
 
             if($request->hasFile('banner')){
-                $iconPath = $request->file('banner')->store('banners', 'public');
+                $bannerPath = $request->file('banner')->store('banners', 'public');
                 $validated['banner'] = $bannerPath;
             }
 

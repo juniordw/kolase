@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAboutRequest;
 use App\Models\CompanyAbout;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CompanyAboutController extends Controller
 {

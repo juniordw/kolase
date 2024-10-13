@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePrincipleRequest;
 use App\Models\OurPrinciple;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OurPrincipleController extends Controller
 {
@@ -39,7 +40,7 @@ class OurPrincipleController extends Controller
             }
 
             if($request->hasFile('thumbnail')){
-                $iconPath = $request->file('thumbnail')->store('thumbnails', 'public');
+                $thumbnailPath = $request->file('thumbnail')->store('thumbnails', 'public');
                 $validated['thumbnail'] = $thumbnailPath;
             }
 
@@ -77,7 +78,7 @@ class OurPrincipleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OurPrinciple $ourPrinciple)
+    public function destroy(OurPrinciple $principle)
     {
         DB::transaction(function() use ($principle){
             $principle->delete();

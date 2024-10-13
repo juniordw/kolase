@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreClinetRequest;
 use App\Models\ProjectClient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProjectClientController extends Controller
 {
@@ -39,7 +40,7 @@ class ProjectClientController extends Controller
             }
 
             if($request->hasFile('logo')){
-                $iconPath = $request->file('logo')->store('logos', 'public');
+                $logoPath = $request->file('logo')->store('logos', 'public');
                 $validated['logo'] = $logoPath;
             }
 
