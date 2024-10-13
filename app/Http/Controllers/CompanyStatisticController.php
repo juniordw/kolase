@@ -72,8 +72,11 @@ class CompanyStatisticController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CompanyStatistic $companyStatistic)
+    public function destroy(CompanyStatistic $statistic)
     {
-        //
+        DB::transaction(function() use ($statistic){
+            $statistic->delete();
+        });
+        return redirect()->route('admin.statistics.index');
     }
 }

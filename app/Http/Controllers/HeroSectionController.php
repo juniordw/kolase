@@ -74,6 +74,9 @@ class HeroSectionController extends Controller
      */
     public function destroy(HeroSection $heroSection)
     {
-        //
+        DB::transaction(function() use ($heroSection){
+            $heroSection->delete();
+        });
+        return redirect()->route('admin.hero_sections.index');
     }
 }
