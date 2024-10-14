@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('keypoint');
             $table->foreignId('company_about_id')->constrained()->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

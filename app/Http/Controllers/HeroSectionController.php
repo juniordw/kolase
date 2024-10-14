@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreHeroSectionRequest;
+use App\Http\Requests\UpdateHeroSectionRequest;
 use App\Models\HeroSection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -59,15 +60,27 @@ class HeroSectionController extends Controller
      */
     public function edit(HeroSection $heroSection)
     {
-        //
+        return view('admin.hero_sections.edit', compact('heroSection'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, HeroSection $heroSection)
+    public function update(UpdateHeroSectionRequest $request, HeroSection $heroSection)
     {
-        //
+        DB::transaction(function() use ($request, $heroSection){
+            $validated = $request->validated();
+
+            if($request->hasFile('banner')){
+                $bannerPath = $request->file('banner')->store('banners', 'public');
+                $validated['banner'] = $bannerPath;
+            }
+
+            $heroSection->update($validated);
+
+        });
+
+        return redirect()->route('admin.hero_sections.index');
     }
 
     /**
