@@ -8,13 +8,13 @@
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden p-10 shadow-sm sm:rounded-lg"> 
                 @if ($errors->any())
-                @foreach ($errors-all() as $error)
+                @foreach ($errors->all() as $error)
                 <div class="py-3 w-full rounded-3xl bg-red-500 text-white">
                     {{$error}}
                 </div>
                 @endforeach
                 @endif
-                <form method="POST" action="{{route('admin.teams.update'),$team}}" enctype="multipart/form-data">
+                <form method="POST" action="{{route('admin.teams.update',$team)}}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="mt-4">
                         <x-input-label for="location" :value="__('location')" />
-                        <x-text-input id="location" class="block mt-1 w-full" type="text" name="location" value="{{$tema->location}}" required autofocus autocomplete="location" />
+                        <x-text-input id="location" class="block mt-1 w-full" type="text" name="location" value="{{$team->location}}" required autofocus autocomplete="location" />
                         <x-input-error :messages="$errors->get('location')" class="mt-2" />
                     </div>
                     <div class="mt-4">
